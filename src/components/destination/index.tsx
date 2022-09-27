@@ -14,7 +14,6 @@ import { Tools } from "@/utils";
 import IconComponent from "@/components/IconComponent";
 const children = [];
 
-
 /** 
  * TODO:
  * 1、作为通用的组件, 逻辑不应该耦合在组件里面.
