@@ -12,6 +12,7 @@ import showToast from 'show-toast';
 import { dispatch } from "@/utils/request";
 import { Tools } from "@/utils";
 import IconComponent from "@/components/IconComponent";
+
 const children = [];
 
 /** 
@@ -53,7 +54,9 @@ const Destination: FC<Props> = ({ content, type = "int", DEFAULT_DATA, enumerati
   const [options, setOptions] = useState();
 
   useEffect(() => {
+
     const children: any = [];
+
     if (destinationTemplate?.length < destination?.length) {
       destinationTemplate && destinationTemplate?.map((item, index) => {
         children.push(
@@ -71,13 +74,12 @@ const Destination: FC<Props> = ({ content, type = "int", DEFAULT_DATA, enumerati
         );
       });
     }
+
     setOptions(children);
   }, [destination, destinationTemplate]);
 
-
   useMemo(() => {
   }, []);
-
 
   const onHandleChangeClick = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === "") {
@@ -120,6 +122,7 @@ const Destination: FC<Props> = ({ content, type = "int", DEFAULT_DATA, enumerati
       showToast(common.selectDestinationTip)
     }
     let seleteds: ISelectItems[] = [];
+
     options.map((item, key) => {
       if (item.key) {
         seleteds.push({
@@ -129,6 +132,7 @@ const Destination: FC<Props> = ({ content, type = "int", DEFAULT_DATA, enumerati
         })
       }
     })
+
     productModel.addDestinationVal(seleteds);
     dispatch({ type: "product/saveDestination", payload: seleteds });
   }
@@ -211,11 +215,14 @@ const Destination: FC<Props> = ({ content, type = "int", DEFAULT_DATA, enumerati
                   menuItemSelectedIcon={singleItemIcon}
                   value={productModel.destination || []}
                   onChange={(val: string[], option) => {
+
                     if (val && val?.length > 5) {
                       showToast(common.addlimit);
                       return;
                     }
+
                     let options: ISelectItems[] = [];
+
                     val.forEach(item => {
                       destination.forEach(element => {
                         if (element.value == item) {
@@ -235,9 +242,6 @@ const Destination: FC<Props> = ({ content, type = "int", DEFAULT_DATA, enumerati
                           })
                         }
                       })
-                      productModel.addDestinationVal(seleteds);
-                      dispatch({ type: "product/saveDestination", payload: seleteds });
-                      onHandleQuotationCalculated(undefined, undefined, seleteds);
                     }
                   }}
                   open={isOpen}
@@ -309,6 +313,4 @@ const Destination: FC<Props> = ({ content, type = "int", DEFAULT_DATA, enumerati
   );
 };
 
-export default connect((state: RootState) => ({
-  content: state.global?.medusaContent
-}))(React.memo(Destination));
+export default Destination;

@@ -19,7 +19,7 @@ const PortalCard: React.FC<PortalCardProps> = (props) => {
       {description}
     </div>
     <div>
-      <Button type="normal">详情</Button>
+      <Button type="normal">详情3333</Button>
     </div>
   </div>)
 }
